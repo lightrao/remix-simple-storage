@@ -2,18 +2,19 @@
 pragma solidity 0.8.18; // solidity versions
 
 contract SimpleStorage {
-    // favoriteNumber gets initialized to 0 if no value is given
-    uint256 favoriteNumber;
-
-    function store(uint256 _favoriteNumber) public {
-        favoriteNumber = _favoriteNumber;
+    struct Person {
+        uint256 favoriteNumber;
+        string name;
     }
 
-    function retrieve() public view returns (uint256) {
-        return favoriteNumber;
-    }
+    // dynamic array
+    Person[] public listOfPeople;
 
-    function retrieve2() public pure returns (uint) {
-        return 7;
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        Person memory newPerson = Person({
+            favoriteNumber: _favoriteNumber,
+            name: _name
+        });
+        listOfPeople.push(newPerson);
     }
 }
